@@ -7,3 +7,7 @@ Log cleared by user.
 2026-02-10 15:10:58,033 - INFO - FitFuel Vending Machine started (streamlined version)
 2026-02-10 15:11:06,043 - INFO - Sensor data loaded: Weight=75.5kg, Muscle=35.2%, RMR=1650.0kcal, Fat=22.3%
 2026-02-10 15:11:06,043 - INFO - Sensor data loaded successfully
+2026-02-10 15:22:18,459 - INFO - Sensor data loaded: Weight=75.5kg, Muscle=35.2%, RMR=1650.0kcal, Fat=22.3%
+2026-02-10 15:22:27,026 - INFO - FitFuel Vending Machine started (streamlined version)
+2026-02-10 15:22:38,530 - INFO - Sensor data loaded: Weight=75.5kg, Muscle=35.2%, RMR=1650.0kcal, Fat=22.3%
+2026-02-10 15:22:38,530 - INFO - Sensor data loaded successfully
