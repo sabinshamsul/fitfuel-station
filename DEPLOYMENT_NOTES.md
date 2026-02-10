@@ -25,6 +25,7 @@ This document outlines the steps to deploy, configure, and maintain the FitFuel 
     *   `gym_bg_1.jpg`
     *   `gym_bg_2.jpg`
     *   `gym_bg_3.jpg`
+<<<<<<< HEAD
     *   `pea_protein.png`
     *   `sunflower_seed.png`
     *   `rice_syrup.png`
@@ -39,6 +40,8 @@ This document outlines the steps to deploy, configure, and maintain the FitFuel 
     *   `coffee.png`
     *   `matcha.png`
     *   `vanilla.png`
+=======
+>>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 
 ## 3. Configuration
 

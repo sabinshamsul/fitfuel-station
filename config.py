@@ -14,6 +14,7 @@ class Config:
     HEIGHT = 800
     
     # Color Scheme
+<<<<<<< HEAD
     PRIMARY_COLOR = "#00b0ff"      # Bright blue
     SECONDARY_COLOR = "#80e2ff"    # Light blue (for hover)
     TEXT_COLOR = "white"
@@ -22,12 +23,25 @@ class Config:
     SEPARATOR_COLOR = "#38383a"    # Medium gray
     MUTED_TEXT = "#a0a0a5"         # Lighter gray text
     TEXT_BACKDROP_COLOR = "#101012" # Very dark, for text readability
+=======
+    PRIMARY_COLOR = "#00c853"      # Bright green
+    SECONDARY_COLOR = "#66ffb2"    # Light green
+    TEXT_COLOR = "white"
+    PANEL_BG = "#000000"           # Black
+    PANEL_SECONDARY_BG = "#1a1a1a" # Dark gray
+    SEPARATOR_COLOR = "#333333"    # Medium gray
+    MUTED_TEXT = "#aaaaaa"         # Gray text
+>>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     # Timing (in milliseconds)
     SLIDE_DELAY = 3500             # Time between slideshow transitions
     FADE_STEPS = 10                # Number of steps in fade animation
     PULSE_DELAY = 500              # Pulse animation speed
+<<<<<<< HEAD
     RESULT_DISPLAY_TIME = 20000    # How long to show results
+=======
+    RESULT_DISPLAY_TIME = 4000     # How long to show results
+>>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     PROCESSING_DISPLAY_TIME = 1500 # Loading screen duration
     INACTIVITY_TIMEOUT = 30000     # Auto-reset after 30 seconds
     
@@ -42,12 +56,21 @@ class Config:
     
     # Font Settings
     FONT_FAMILY = "Helvetica"
+<<<<<<< HEAD
     TITLE_FONT_SIZE = 32
     SUBTITLE_FONT_SIZE = 18
     BUTTON_FONT_SIZE = 16
     TEXT_FONT_SIZE = 14
     SMALL_TEXT_SIZE = 12
     LARGE_TITLE_SIZE = 48
+=======
+    TITLE_FONT_SIZE = 28
+    SUBTITLE_FONT_SIZE = 18
+    BUTTON_FONT_SIZE = 15
+    TEXT_FONT_SIZE = 13
+    SMALL_TEXT_SIZE = 12
+    LARGE_TITLE_SIZE = 36
+>>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     # Button Settings
     BUTTON_WIDTH = 16
@@ -62,6 +85,7 @@ class Config:
     
     # UI Steps
     STEPS = ["Scan", "Mode", "Base", "Flavour", "Refine", "Done"]
+<<<<<<< HEAD
     STEP_ICONS = ["🧍", "🎯", "🌾", "🎨", "🔧", "🏁"]
     
     # Payment Settings
@@ -75,6 +99,8 @@ class Config:
     # Payment Gateway (add your keys)
     REVENUE_MONSTER_API_KEY = os.getenv("RM_API_KEY", "")
     STRIPE_API_KEY = os.getenv("STRIPE_KEY", "")
+=======
+>>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     # AI Settings
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
