@@ -1,1 +1,9 @@
 Log cleared by user.
+2026-02-10 15:01:17,148 - INFO - Sample CSV created: sensor_data.csv
+2026-02-10 15:01:21,585 - ERROR - Error launching vending machine: invalid decimal literal (fitfuel_ui.py, line 18)
+2026-02-10 15:09:20,086 - INFO - Sensor data loaded: Weight=75.5kg, Muscle=35.2%, RMR=1650.0kcal, Fat=22.3%
+2026-02-10 15:09:27,526 - ERROR - Error launching vending machine: invalid decimal literal (config.py, line 34)
+2026-02-10 15:10:51,747 - INFO - Sensor data loaded: Weight=75.5kg, Muscle=35.2%, RMR=1650.0kcal, Fat=22.3%
+2026-02-10 15:10:58,033 - INFO - FitFuel Vending Machine started (streamlined version)
+2026-02-10 15:11:06,043 - INFO - Sensor data loaded: Weight=75.5kg, Muscle=35.2%, RMR=1650.0kcal, Fat=22.3%
+2026-02-10 15:11:06,043 - INFO - Sensor data loaded successfully

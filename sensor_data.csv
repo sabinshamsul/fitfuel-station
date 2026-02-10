@@ -1,6 +1,2 @@
 body_weight_kg,skeletal_muscle_percent,resting_metabolic_rate,body_fat_percent,timestamp
-<<<<<<< HEAD
-75.5,35.2,1650,22.3,2026-02-03T15:12:52.269985
-=======
-80,42,2000,15,2026-01-13T15:12:34.677190
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
+75.5,35.2,1650,22.3,2026-02-10T15:01:17.148954

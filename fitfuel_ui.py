@@ -5,26 +5,17 @@ CSV sensor input → User selections → AI recommendations → 50g bar
 
 import tkinter as tk
 from tkinter import messagebox
-<<<<<<< HEAD
 import tkinter.font as tkfont
 from PIL import Image, ImageTk
 import itertools
 import logging
 import math
-=======
-from PIL import Image, ImageTk
-import itertools
-import logging
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 
 from config import Config
 from sensor_data_reader import SensorDataReader
 from ai_ingredient_recommender import AIIngredientRecommender
-<<<<<<< HEAD
 from allergen_system import AllergenAnalyzer
 # from payment_system import PricingCalculator
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 
 logging.basicConfig(
     level=logging.INFO,
@@ -41,12 +32,9 @@ class FitFuelVendingMachine:
         self.pulse_state = True
         self.current_slide = None
         self.next_slide = None
-<<<<<<< HEAD
         self.loading_animation_job = None
         self.fade_job = None
         self.pulse_job = None
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         
         # Components
         self.sensor_reader = SensorDataReader()
@@ -60,10 +48,7 @@ class FitFuelVendingMachine:
         self.user_selected_ingredients = None
         self.final_recommendation = None
         self.inactivity_timer = None
-<<<<<<< HEAD
         self.ingredient_images = {}
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 
 
 # Initialize
@@ -79,7 +64,6 @@ root.bind("<Escape>", lambda e: root.attributes("-fullscreen", False))
 
 app = FitFuelVendingMachine()
 
-<<<<<<< HEAD
 def on_close():
     """Handle window closing event."""
     app.slideshow_running = False
@@ -100,8 +84,6 @@ def on_close():
 
 root.protocol("WM_DELETE_WINDOW", on_close)
 
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 canvas = tk.Canvas(
     root, 
     width=Config.WIDTH, 
@@ -129,7 +111,6 @@ app.next_slide = next(slide_cycle)
 
 
 def clear_screen():
-<<<<<<< HEAD
     try:
         if not root.winfo_exists():
             return
@@ -140,18 +121,10 @@ def clear_screen():
         canvas.delete("all")
     except Exception:
         pass
-=======
-    # Destroy all child widgets (Frames) to prevent memory leaks
-    for widget in root.winfo_children():
-        if widget != canvas:
-            widget.destroy()
-    canvas.delete("all")
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 
 
 def draw_background(image):
     """Draw background image - FIXED to prevent memory leak."""
-<<<<<<< HEAD
     try:
         if not root.winfo_exists(): return
         photo = ImageTk.PhotoImage(image, master=root)
@@ -196,41 +169,18 @@ def show_title(text, subtitle=None):
     
     canvas.create_text(
         Config.WIDTH // 2, y - (15 if subtitle else 0),
-=======
-    photo = ImageTk.PhotoImage(image)
-    
-    # Delete old background to prevent memory leak
-    canvas.delete("background")
-    
-    # Create new background with tag
-    canvas.create_image(0, 0, image=photo, anchor="nw", tags="background")
-    canvas.tag_lower("background")  # Ensure background stays behind other elements
-    
-    # Store reference (required by tkinter)
-    canvas.bg_photo = photo
-
-
-def show_title(text, subtitle=None):
-    canvas.create_text(
-        Config.WIDTH // 2, 70,
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         text=text,
         fill="white",
         font=(Config.FONT_FAMILY, Config.TITLE_FONT_SIZE, "bold")
     )
     if subtitle:
         canvas.create_text(
-<<<<<<< HEAD
             Config.WIDTH // 2, y + 20,
-=======
-            Config.WIDTH // 2, 110,
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
             text=subtitle,
             fill="#dddddd",
             font=(Config.FONT_FAMILY, 14)
         )
 
-<<<<<<< HEAD
 class RoundedButton(tk.Canvas):
     """Custom rounded button using Canvas."""
     def __init__(self, parent, text, command, width=220, height=60, corner_radius=20, 
@@ -315,15 +265,10 @@ class RoundedButton(tk.Canvas):
 
 
 def create_button(parent, text, command, bg_color=None, width=None, icon=None):
-=======
-
-def create_button(parent, text, command, bg_color=None, width=None):
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     bg = bg_color or Config.PRIMARY_COLOR
     # Hover color: lighter if primary, else slightly lighter grey
     hover_bg = Config.SECONDARY_COLOR if bg == Config.PRIMARY_COLOR else "#888888"
     
-<<<<<<< HEAD
     # Convert width logic: Config.BUTTON_WIDTH is 16 chars.
     # If width is provided (in chars), scale it. If not, use default pixel width.
     # 1 char approx 14px.
@@ -348,30 +293,10 @@ def create_button(parent, text, command, bg_color=None, width=None):
         fg_color="black" if bg == Config.PRIMARY_COLOR else "white",
         icon=icon
     )
-=======
-    btn = tk.Button(
-        parent,
-        text=text,
-        command=command,
-        font=(Config.FONT_FAMILY, Config.BUTTON_FONT_SIZE, "bold"),
-        bg=bg,
-        fg="black",
-        activebackground=hover_bg,
-        relief="flat",
-        width=width or Config.BUTTON_WIDTH,
-        height=Config.BUTTON_HEIGHT,
-        cursor="hand2"
-    )
-    
-    # Add hover effect
-    btn.bind("<Enter>", lambda e: btn.config(bg=hover_bg))
-    btn.bind("<Leave>", lambda e: btn.config(bg=bg))
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     return btn
 
 
 def create_back_button(parent, command, text="← Back"):
-<<<<<<< HEAD
     btn = RoundedButton(
         parent,
         text=text,
@@ -384,51 +309,24 @@ def create_back_button(parent, command, text="← Back"):
         font_size=Config.SMALL_TEXT_SIZE,
         corner_radius=15
     )
-=======
-    btn = tk.Button(
-        parent,
-        text=text,
-        command=command,
-        font=(Config.FONT_FAMILY, Config.SMALL_TEXT_SIZE),
-        bg="#333333",
-        fg="white",
-        activebackground="#555555",
-        relief="flat",
-        width=Config.BACK_BUTTON_WIDTH,
-        height=Config.BACK_BUTTON_HEIGHT,
-        cursor="hand2"
-    )
-    
-    # Add hover effect
-    btn.bind("<Enter>", lambda e: btn.config(bg="#555555"))
-    btn.bind("<Leave>", lambda e: btn.config(bg="#333333"))
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     return btn
 
 
 def draw_progress_bar(step_index):
     """Draw the progress stepper at the top of the screen."""
     steps = Config.STEPS
-<<<<<<< HEAD
     step_icons = Config.STEP_ICONS
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     total_steps = len(steps)
     
     w = Config.WIDTH
     margin_x = 200
-<<<<<<< HEAD
     y = 160 # Moved down to avoid title
-=======
-    y = 150
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     available_w = w - (2 * margin_x)
     step_gap = available_w / (total_steps - 1)
     
     for i, step_name in enumerate(steps):
         x = margin_x + (i * step_gap)
         
-<<<<<<< HEAD
         # Draw connecting line (will be underneath the next circle)
         if i < total_steps - 1:
             next_x = margin_x + ((i + 1) * step_gap)
@@ -449,26 +347,6 @@ def draw_progress_bar(step_index):
 
         if i == step_index:
             canvas.create_text(x, y + r + 20, text=step_name, fill="white", font=(Config.FONT_FAMILY, 14, "bold"))
-=======
-        # Draw connecting line
-        if i < total_steps - 1:
-            next_x = margin_x + ((i + 1) * step_gap)
-            color = Config.PRIMARY_COLOR if i < step_index else "#333333"
-            canvas.create_line(x, y, next_x, y, fill=color, width=3)
-            
-        # Draw node circle
-        r = 10 if i == step_index else 6
-        outline = Config.PRIMARY_COLOR if i <= step_index else "#333333"
-        fill = Config.PRIMARY_COLOR if i <= step_index else "black"
-        
-        canvas.create_oval(x-r, y-r, x+r, y+r, fill=fill, outline=outline, width=2)
-        
-        # Draw label
-        if i == step_index:
-            canvas.create_text(x, y+25, text=step_name, fill="white", font=(Config.FONT_FAMILY, 11, "bold"))
-        else:
-            canvas.create_text(x, y+25, text=step_name, fill="#666666", font=(Config.FONT_FAMILY, 10))
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 
 
 def reset_inactivity_timer(event=None):
@@ -505,7 +383,6 @@ def start_slideshow():
     if app.inactivity_timer:
         root.after_cancel(app.inactivity_timer)
         app.inactivity_timer = None
-<<<<<<< HEAD
         
     # Cancel existing slideshow jobs if any
     if app.fade_job:
@@ -516,8 +393,6 @@ def start_slideshow():
         try: root.after_cancel(app.pulse_job)
         except: pass
         app.pulse_job = None
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     clear_screen()
     fade_transition()
@@ -543,7 +418,6 @@ def fade_transition(alpha=0.0):
     if not app.slideshow_running:
         return
 
-<<<<<<< HEAD
     try:
         # Blend current and next images
         blended_image = Image.blend(app.current_slide, app.next_slide, alpha)
@@ -563,29 +437,10 @@ def fade_transition(alpha=0.0):
             app.fade_job = root.after(Config.SLIDE_DELAY, fade_transition, 0.0)
     except Exception:
         pass
-=======
-    # Blend current and next images
-    blended_image = Image.blend(app.current_slide, app.next_slide, alpha)
-    draw_background(blended_image)
-    overlay_landing_text()  # Redraw text on top of the blended image
-
-    alpha += 1.0 / Config.FADE_STEPS
-    if alpha <= 1.0:
-        # Continue fading in the next frame
-        # A smaller delay here (e.g., 30ms) creates a smoother animation
-        root.after(30, fade_transition, alpha)
-    else:
-        # Fade complete, set up for the next cycle
-        app.current_slide = app.next_slide
-        app.next_slide = next(slide_cycle)
-        # Wait for the slide delay, then start the next fade from alpha=0
-        root.after(Config.SLIDE_DELAY, fade_transition, 0.0)
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 
 
 def overlay_landing_text():
     canvas.delete("overlay")
-<<<<<<< HEAD
     
     # Backdrop for better readability
     canvas.create_rectangle(
@@ -596,13 +451,10 @@ def overlay_landing_text():
         tags="overlay"
     )
     
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     canvas.create_text(
         Config.WIDTH // 2, 170,
         text="FITFUEL STATION",
         fill="white",
-<<<<<<< HEAD
         font=(Config.FONT_FAMILY, Config.LARGE_TITLE_SIZE, "bold"),
         tags="overlay"
     )
@@ -618,16 +470,6 @@ def overlay_landing_text():
         text="Get a protein bar customized for your body and goals in minutes.",
         fill=Config.MUTED_TEXT,
         font=(Config.FONT_FAMILY, 14),
-=======
-        font=(Config.FONT_FAMILY, 36, "bold"),
-        tags="overlay"
-    )
-    canvas.create_text(
-        Config.WIDTH // 2, 220,
-        text="AI-Powered Personalized Nutrition",
-        fill="#dddddd",
-        font=(Config.FONT_FAMILY, 18),
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         tags="overlay"
     )
 
@@ -636,7 +478,6 @@ def pulse_text():
     if not app.slideshow_running:
         return
     
-<<<<<<< HEAD
     try:
         color = Config.PRIMARY_COLOR if app.pulse_state else Config.SECONDARY_COLOR
         app.pulse_state = not app.pulse_state
@@ -652,20 +493,6 @@ def pulse_text():
         app.pulse_job = root.after(Config.PULSE_DELAY, pulse_text)
     except Exception:
         pass
-=======
-    color = Config.PRIMARY_COLOR if app.pulse_state else Config.SECONDARY_COLOR
-    app.pulse_state = not app.pulse_state
-    
-    canvas.delete("pulse")
-    canvas.create_text(
-        Config.WIDTH // 2, Config.HEIGHT - 80,
-        text="Touch to Begin",
-        fill=color,
-        font=(Config.FONT_FAMILY, 16, "bold"),
-        tags="pulse"
-    )
-    root.after(Config.PULSE_DELAY, pulse_text)
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 
 
 def stop_slideshow(event=None):
@@ -673,7 +500,6 @@ def stop_slideshow(event=None):
     if not app.slideshow_running:
         return
     app.slideshow_running = False
-<<<<<<< HEAD
     
     # Cancel slideshow jobs
     if app.fade_job:
@@ -685,8 +511,6 @@ def stop_slideshow(event=None):
         except: pass
         app.pulse_job = None
         
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     canvas.delete("pulse")
     read_sensor_data()
 
@@ -694,7 +518,6 @@ def stop_slideshow(event=None):
 # =============================
 # SENSOR DATA READING
 # =============================
-<<<<<<< HEAD
 def animate_sensor_scanning(step=0):
     """Animate a pulsing ring for sensor reading."""
     canvas.delete("loading_anim")
@@ -720,8 +543,6 @@ def animate_sensor_scanning(step=0):
     app.loading_animation_job = root.after(30, animate_sensor_scanning, step + 1)
 
 
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 def read_sensor_data():
     """Read body composition from CSV file."""
     clear_screen()
@@ -729,11 +550,7 @@ def read_sensor_data():
     
     canvas.create_text(
         Config.WIDTH // 2, Config.HEIGHT // 2 - 50,
-<<<<<<< HEAD
         text="📊 Scanning Body Composition...",
-=======
-        text="📊 Reading Sensor Data...",
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         fill="white",
         font=(Config.FONT_FAMILY, 24, "bold")
     )
@@ -745,17 +562,8 @@ def read_sensor_data():
         font=(Config.FONT_FAMILY, 14)
     )
     
-<<<<<<< HEAD
     # Start the animation
     animate_sensor_scanning()
-=======
-    canvas.create_text(
-        Config.WIDTH // 2, Config.HEIGHT // 2 + 50,
-        text="●  ●  ●",
-        fill=Config.PRIMARY_COLOR,
-        font=(Config.FONT_FAMILY, 20)
-    )
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     root.update()
     root.after(2000, load_sensor_data)
@@ -763,14 +571,11 @@ def read_sensor_data():
 
 def load_sensor_data():
     """Load data from CSV file."""
-<<<<<<< HEAD
     # Stop the animation
     if app.loading_animation_job:
         root.after_cancel(app.loading_animation_job)
         app.loading_animation_job = None
 
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     try:
         # Try to read sensor data
         app.sensor_data = app.sensor_reader.read_latest_data()
@@ -837,7 +642,6 @@ def show_sensor_confirmation():
     # Add a frame for the button to give it space
     button_frame = tk.Frame(panel, bg=Config.PANEL_BG)
     button_frame.grid(row=len(data_points), column=0, columnspan=2, pady=(25, 0))
-<<<<<<< HEAD
     create_back_button(button_frame, start_slideshow, "Restart").pack(side="left", padx=10)
     create_button(button_frame, "Edit", lambda: edit_sensor_data_screen(app.sensor_data), 
                   bg_color="#666666", width=8).pack(side="left", padx=10)
@@ -891,12 +695,6 @@ def edit_sensor_data_screen(current_data):
     create_button(button_frame, "Save Changes", save_edited_data).pack(side="left", padx=10)
 
 
-=======
-    create_back_button(button_frame, start_slideshow, "Cancel").pack(side="left", padx=10)
-    create_button(button_frame, "Continue →", workout_mode_screen).pack(side="left", padx=10)
-
-
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 # =============================
 # USER SELECTIONS
 # =============================
@@ -905,17 +703,12 @@ def workout_mode_screen():
     clear_screen()
     draw_background(selection_bg_image)
     draw_progress_bar(1)
-<<<<<<< HEAD
     show_title("Choose Workout Mode", "Select based on your current activity")
-=======
-    show_title("Choose Workout Mode")
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     panel = tk.Frame(root, bg=Config.PANEL_BG, padx=30, pady=30,
                     highlightbackground=Config.PRIMARY_COLOR, highlightthickness=1)
     canvas.create_window(Config.WIDTH // 2, Config.HEIGHT // 2 + 40, window=panel)
     
-<<<<<<< HEAD
     for col, (label, value, icon) in enumerate([
         ("Pre-Workout", 'pre', "⚡"),
         ("Post-Workout", 'post', "🔄")
@@ -941,21 +734,6 @@ def workout_mode_screen():
 
 
 
-=======
-    for col, (label, value) in enumerate([
-        ("Pre-Workout", 'pre'),
-        ("Post-Workout", 'post')
-    ]):
-        create_button(panel, label, lambda v=value: select_mode(v)).grid(
-            row=0, column=col, padx=25
-        )
-    
-    create_back_button(panel, show_sensor_confirmation).grid(
-        row=1, column=0, columnspan=2, pady=(30, 0)
-    )
-
-
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 def select_mode(mode):
     app.mode = mode
     carb_mode_screen()
@@ -966,17 +744,12 @@ def carb_mode_screen():
     clear_screen()
     draw_background(selection_bg_image)
     draw_progress_bar(2)
-<<<<<<< HEAD
     show_title("Select Energy Base", "Choose your preferred carbohydrate source")
-=======
-    show_title("Select Energy Base")
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     panel = tk.Frame(root, bg=Config.PANEL_BG, padx=30, pady=30,
                     highlightbackground=Config.PRIMARY_COLOR, highlightthickness=1)
     canvas.create_window(Config.WIDTH // 2, Config.HEIGHT // 2 + 40, window=panel)
     
-<<<<<<< HEAD
     for col, (label, value, icon) in enumerate([
         ("Maltodextrin\n(Fast Energy)", 'maltodextrin', "⚡"),
         ("Pumpkin & Rice\n(Whole Food)", 'pumpkinrice', "🎃")
@@ -996,18 +769,6 @@ def carb_mode_screen():
     
     create_back_button(panel, workout_mode_screen).grid(
         row=2, column=0, columnspan=2, pady=(15, 0)
-=======
-    for col, (label, value) in enumerate([
-        ("Maltodextrin\n(Fast Energy)", 'maltodextrin'),
-        ("Pumpkin & Rice\n(Whole Food)", 'pumpkinrice')
-    ]):
-        create_button(panel, label, lambda v=value: select_carb_mode(v)).grid(
-            row=0, column=col, padx=25
-        )
-    
-    create_back_button(panel, workout_mode_screen).grid(
-        row=1, column=0, columnspan=2, pady=(30, 0)
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     )
 
 
@@ -1021,18 +782,13 @@ def flavour_screen():
     clear_screen()
     draw_background(selection_bg_image)
     draw_progress_bar(3)
-<<<<<<< HEAD
     show_title("Choose Flavour", "Add a natural flavour to your bar")
-=======
-    show_title("Choose Flavour")
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     panel = tk.Frame(root, bg=Config.PANEL_BG, padx=30, pady=30,
                     highlightbackground=Config.PRIMARY_COLOR, highlightthickness=1)
     canvas.create_window(Config.WIDTH // 2, Config.HEIGHT // 2 + 40, window=panel)
     
     options = [
-<<<<<<< HEAD
         ("None", 'none', "🚫"),
         ("Coffee", 'coffee', "☕"),
         ("Chocolate", 'chocolate', "🍫"),
@@ -1041,16 +797,6 @@ def flavour_screen():
     
     for i, (label, value, icon) in enumerate(options):
         create_button(panel, label, lambda v=value: select_flavour(v), icon=icon).grid(
-=======
-        ("None", 'none'),
-        ("Coffee", 'coffee'),
-        ("Chocolate", 'chocolate'),
-        ("Matcha", 'matcha')
-    ]
-    
-    for i, (label, value) in enumerate(options):
-        create_button(panel, label, lambda v=value: select_flavour(v)).grid(
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
             row=i // 2, column=i % 2, padx=25, pady=15
         )
     
@@ -1073,11 +819,7 @@ def ask_custom_ingredients():
     draw_background(selection_bg_image)
     
     draw_progress_bar(4)
-<<<<<<< HEAD
     show_title("Refine Your Bar", "Use our AI recommendation or choose your own ingredients")
-=======
-    show_title("Ingredient Selection", "Do you want to choose specific ingredients?")
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     panel = tk.Frame(root, bg=Config.PANEL_BG, padx=40, pady=30,
                     highlightbackground=Config.PRIMARY_COLOR, highlightthickness=1)
@@ -1085,11 +827,7 @@ def ask_custom_ingredients():
     
     tk.Label(
         panel,
-<<<<<<< HEAD
         text="Our AI optimizes ingredients for your body composition and goals.\nOr, you can take full control and select them yourself.",
-=======
-        text="Our AI will recommend the best ingredients\nbased on your body composition.",
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         bg=Config.PANEL_BG,
         fg="#dddddd",
         font=(Config.FONT_FAMILY, 13),
@@ -1101,24 +839,15 @@ def ask_custom_ingredients():
     
     create_button(btn_frame, "AI Recommendation", 
                  lambda: [setattr(app, 'user_selected_ingredients', None), generate_recommendation()],
-<<<<<<< HEAD
                  bg_color=Config.PRIMARY_COLOR, icon="🤖").pack(side="left", padx=10)
     
     create_button(btn_frame, "Choose Ingredients", 
                  show_ingredient_selection,
                  bg_color="#666666", icon="📝").pack(side="left", padx=10)
-=======
-                 bg_color=Config.PRIMARY_COLOR).pack(side="left", padx=10)
-    
-    create_button(btn_frame, "Choose Ingredients", 
-                 show_ingredient_selection,
-                 bg_color="#666666").pack(side="left", padx=10)
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     create_back_button(panel, flavour_screen).pack(pady=(20, 0))
 
 
-<<<<<<< HEAD
 def show_ingredient_selection(): # REVAMPED
     """Show ingredient selection screen with descriptions."""
     clear_screen()
@@ -1265,35 +994,12 @@ def show_ingredient_selection(): # REVAMPED
         desc_image_label.image = photo # Keep reference
 
     # Group ingredients by type for organized display
-=======
-def show_ingredient_selection():
-    """Show ingredient selection screen."""
-    clear_screen()
-    draw_background(selection_bg_image)
-    
-    draw_progress_bar(4)
-    show_title("Select Ingredients", "Choose ingredients you want in your bar")
-    
-    # Get available ingredients
-    ingredients = app.ai_recommender.get_available_ingredients()
-    
-    # Create scrollable frame
-    main_frame = tk.Frame(root, bg=Config.PANEL_BG, padx=20, pady=20,
-                         highlightbackground=Config.PRIMARY_COLOR, highlightthickness=1)
-    canvas.create_window(Config.WIDTH // 2, Config.HEIGHT // 2 + 50, window=main_frame)
-    
-    # Checkboxes for ingredients
-    selected_vars = {}
-    
-    # Group by type
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     types = {}
     for ing in ingredients:
         ing_type = ing['type']
         if ing_type not in types:
             types[ing_type] = []
         types[ing_type].append(ing)
-<<<<<<< HEAD
 
     for ing_type in ['Protein', 'Carb', 'Binder', 'Flavour', 'Other']:
         if ing_type not in types: continue
@@ -1342,60 +1048,10 @@ def show_ingredient_selection():
             rb.bind("<ButtonPress-1>", scroll_start, add='+')
             rb.bind("<B1-Motion>", scroll_move)
             rb.bind("<MouseWheel>", _on_mousewheel)
-=======
-    
-    row = 0
-    for ing_type, ing_list in types.items():
-        tk.Label(
-            main_frame,
-            text=f"{ing_type}:",
-            bg=Config.PANEL_BG,
-            fg=Config.PRIMARY_COLOR,
-            font=(Config.FONT_FAMILY, 12, "bold")
-        ).grid(row=row, column=0, columnspan=2, sticky="w", pady=(10, 5))
-        row += 1
-        
-        for ing in ing_list:
-            var = tk.BooleanVar()
-            selected_vars[ing['id']] = var
-            
-            cb = tk.Checkbutton(
-                main_frame,
-                text=ing['name'],
-                variable=var,
-                bg=Config.PANEL_BG,
-                fg="white",
-                selectcolor="#2a2a2a",
-                activebackground=Config.PANEL_BG,
-                activeforeground="white",
-                font=(Config.FONT_FAMILY, 11)
-            )
-            cb.grid(row=row, column=0, columnspan=2, sticky="w", pady=2)
-            row += 1
-    
-    # Submit button
-    def submit_selection():
-        selected = [ing_id for ing_id, var in selected_vars.items() if var.get()]
-        if not selected:
-            messagebox.showwarning("No Selection", "Please select at least one ingredient or use AI recommendation")
-            return
-        app.user_selected_ingredients = selected
-        generate_recommendation()
-    
-    create_button(main_frame, "Generate Bar", submit_selection).grid(
-        row=row, column=0, columnspan=2, pady=20
-    )
-    
-    create_back_button(main_frame, ask_custom_ingredients).grid(
-        row=row+1, column=0, columnspan=2, pady=(0, 20)
-    )
-
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 
 # =============================
 # AI RECOMMENDATION
 # =============================
-<<<<<<< HEAD
 def animate_ai_processing(step=0):
     """Animate a rotating spinner for AI."""
     canvas.delete("loading_anim")
@@ -1419,53 +1075,37 @@ def animate_ai_processing(step=0):
 
     app.loading_animation_job = root.after(30, animate_ai_processing, step + 1)
 
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
 def generate_recommendation():
     """Generate AI-powered ingredient recommendation."""
     clear_screen()
     draw_background(selection_bg_image)
     
     canvas.create_text(
-<<<<<<< HEAD
         Config.WIDTH // 2, Config.HEIGHT // 2 - 100,
-=======
-        Config.WIDTH // 2, Config.HEIGHT // 2 - 30,
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         text="🤖 AI Analyzing...",
         fill="white",
         font=(Config.FONT_FAMILY, 24, "bold")
     )
     
     canvas.create_text(
-<<<<<<< HEAD
         Config.WIDTH // 2, Config.HEIGHT // 2 + 100,
-=======
-        Config.WIDTH // 2, Config.HEIGHT // 2 + 20,
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         text="Optimizing ingredients for your body composition",
         fill="#dddddd",
         font=(Config.FONT_FAMILY, 13)
     )
     
-<<<<<<< HEAD
     animate_ai_processing()
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     root.update()
     root.after(2000, calculate_formulation)
 
 
 def calculate_formulation():
     """Calculate final formulation using AI - FIXED VERSION."""
-<<<<<<< HEAD
     # Stop animation
     if app.loading_animation_job:
         root.after_cancel(app.loading_animation_job)
         app.loading_animation_job = None
 
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     try:
         app.final_recommendation = app.ai_recommender.recommend_ingredients(
             app.sensor_data,
@@ -1610,10 +1250,6 @@ def show_maintenance_mode():
             except Exception as e:
                 messagebox.showerror("Error", f"Could not clear logs: {e}")
 
-<<<<<<< HEAD
-=======
-    create_button(btn_frame, "Exit App", lambda: root.destroy(), bg_color="#ff4444", width=15).pack(side="left", padx=5)
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     create_button(btn_frame, "Clear Logs", clear_logs, bg_color="#4444ff", width=15).pack(side="left", padx=5)
     create_button(btn_frame, "Return", start_slideshow, width=15).pack(side="left", padx=5)
 
@@ -1631,15 +1267,12 @@ def show_results():
     
     result = app.final_recommendation
     
-<<<<<<< HEAD
     # Safety check for None result
     if result is None:
         logging.error("show_results called with None result")
         show_error("No recommendation data found. Please try again.")
         return
     
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     # Summary
     summary_frame = tk.Frame(root, bg=Config.PANEL_SECONDARY_BG, padx=20, pady=15,
                             highlightbackground=Config.PRIMARY_COLOR, highlightthickness=1)
@@ -1667,23 +1300,14 @@ def show_results():
     ).grid(row=0, column=0, columnspan=2, sticky="w", pady=(0, 10))
     
     # Show top 10 ingredients
-<<<<<<< HEAD
     sorted_ings = sorted(result['formulation_grams'].items(), key=lambda x: -x[1])[:10]
     for i, (ing, grams) in enumerate(sorted_ings):
-=======
-    sorted_ings = sorted(result['formulation_grams'].items(), key=lambda x: -x[1])
-    for i, (ing, grams) in enumerate(sorted_ings[:10]):
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         ing_name = ing.replace('_', ' ').title()
         # Ingredient Name
         tk.Label(
             ing_frame,
             text=ing_name,
-<<<<<<< HEAD
             bg=Config.PANEL_BG, # Changed from PANEL_BG
-=======
-            bg=Config.PANEL_BG,
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
             fg="#dddddd",
             font=(Config.FONT_FAMILY, 11),
         ).grid(row=i+1, column=0, sticky="w", pady=2)
@@ -1691,16 +1315,11 @@ def show_results():
         tk.Label(
             ing_frame,
             text=f"{grams:.2f}g",
-<<<<<<< HEAD
             bg=Config.PANEL_BG, # Changed from PANEL_BG
-=======
-            bg=Config.PANEL_BG,
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
             fg="white",
             font=(Config.FONT_FAMILY, 11, "bold"),
         ).grid(row=i+1, column=1, sticky="e", padx=(40, 0))
     
-<<<<<<< HEAD
     # Allergen preview removed to make it a separate screen as requested.
     # It will be shown in full in the next step.
     
@@ -1933,23 +1552,6 @@ def show_error(message):
         root.after_cancel(app.loading_animation_job)
         app.loading_animation_job = None
 
-=======
-    # Status message
-    canvas.create_text(
-        Config.WIDTH // 2, Config.HEIGHT - 60,
-        text="✓ Dispensing your bar...",
-        fill=Config.PRIMARY_COLOR,
-        font=(Config.FONT_FAMILY, 14, "bold")
-    )
-    
-    root.after(5000, start_slideshow)
-    
-    logging.info(f"Results displayed - {len(result['selected_ingredients'])} ingredients")
-
-
-def show_error(message):
-    """Show error message - ENHANCED VERSION."""
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     clear_screen()
     draw_background(selection_bg_image)
     
@@ -2011,10 +1613,7 @@ def main():
     # Bind global events for inactivity tracking
     root.bind_all("<Button-1>", reset_inactivity_timer)
     root.bind_all("<Key>", reset_inactivity_timer)
-<<<<<<< HEAD
     root.bind_all("<Key>", reset_inactivity_timer)
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     
     start_slideshow()
     root.mainloop()

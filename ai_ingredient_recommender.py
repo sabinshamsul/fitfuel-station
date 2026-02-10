@@ -40,11 +40,8 @@ class Ingredient:
     protein_content: float  # g per 100g
     carb_content: float
     fat_content: float
-<<<<<<< HEAD
     description: str
     image_file: str = None
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     is_binder: bool = False
     is_protein: bool = False
     is_carb: bool = False
@@ -59,7 +56,6 @@ class AIIngredientRecommender:
     
     # Available ingredients database
     INGREDIENTS = {
-<<<<<<< HEAD
         'pea_protein': Ingredient('Pea Protein Isolate', 18, 38, 1, 85, 5, 3, 'High-quality plant protein for muscle repair and growth.', image_file='pea_protein.png', is_protein=True),
         'sunflower_seed': Ingredient('Sunflower Seed Powder', 6, 18, 2, 21, 20, 51, 'Rich in protein and healthy fats, supports muscle maintenance.', image_file='sunflower_seed.png', is_protein=True),
         'rice_syrup': Ingredient('Rice Syrup', 10, 20, 3, 0, 80, 0, 'A fast-acting carbohydrate binder for quick energy.', image_file='rice_syrup.png', is_binder=True),
@@ -74,22 +70,6 @@ class AIIngredientRecommender:
         'instant_coffee': Ingredient('Instant Coffee Powder', 0, 1.5, 12, 12, 42, 0, 'Provides coffee flavour and a caffeine boost.', image_file='coffee.png', is_flavour=True),
         'matcha_powder': Ingredient('Matcha Powder', 0, 0.8, 13, 30, 39, 5, 'Green tea powder with antioxidants and L-theanine for calm focus.', image_file='matcha.png', is_flavour=True),
         'vanilla': Ingredient('Vanilla Powder', 0, 0.3, 14, 0, 13, 0, 'Adds a smooth, sweet flavour note.', image_file='vanilla.png', is_flavour=True),
-=======
-        'pea_protein': Ingredient('Pea Protein Isolate', 18, 38, 1, 85, 5, 3, is_protein=True),
-        'sunflower_seed': Ingredient('Sunflower Seed Powder', 6, 18, 2, 21, 20, 51, is_protein=True),
-        'rice_syrup': Ingredient('Rice Syrup', 10, 20, 3, 0, 80, 0, is_binder=True),
-        'glycerine': Ingredient('Glycerine (Food Grade)', 6, 12, 4, 0, 0, 0, is_binder=True),
-        'maltodextrin': Ingredient('Maltodextrin', 0, 10, 5, 0, 95, 0, is_carb=True),
-        'pumpkin_seed_flour': Ingredient('Pumpkin Seed Flour', 0, 12, 6, 33, 14, 49, is_carb=True),
-        'brown_rice_flour': Ingredient('Brown Rice Flour', 0, 10, 7, 7, 77, 3, is_carb=True),
-        'leucine': Ingredient('Leucine', 0, 4, 8, 100, 0, 0, is_protein=True),
-        'guarana_extract': Ingredient('Guarana Extract', 0, 2, 9, 0, 0, 0),
-        'salt': Ingredient('Salt', 0.2, 0.8, 10, 0, 0, 0),
-        'cocoa_powder': Ingredient('Cocoa Powder', 0, 3, 11, 20, 58, 14, is_flavour=True),
-        'instant_coffee': Ingredient('Instant Coffee Powder', 0, 1.5, 12, 12, 42, 0, is_flavour=True),
-        'matcha_powder': Ingredient('Matcha Powder', 0, 0.8, 13, 30, 39, 5, is_flavour=True),
-        'vanilla': Ingredient('Vanilla Powder', 0, 0.3, 14, 0, 13, 0, is_flavour=True),
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
     }
     
     def __init__(self):
@@ -162,7 +142,6 @@ class AIIngredientRecommender:
         Returns:
             dict: Recommended ingredients with grams for 50g bar
         """
-<<<<<<< HEAD
         # NEW: Check if user manually selected a flavour, which overrides the initial choice.
         # This resolves conflicts when user picks "None" then a flavour.
         if user_selected:
@@ -182,8 +161,6 @@ class AIIngredientRecommender:
             if original_flavour != flavour:
                 self.logger.info(f"User override: Flavour changed from '{original_flavour}' to '{flavour}' based on manual selection.")
 
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         # Analyze user needs
         needs = self.analyze_user_needs(sensor_data, mode, carb_mode, flavour)
         
@@ -196,11 +173,7 @@ class AIIngredientRecommender:
         log_formulation_details(formulation, "AFTER AI ADJUSTMENTS")
         
         # Add flavour system
-<<<<<<< HEAD
         formulation = self._add_flavour_system(formulation, flavour, carb_mode)
-=======
-        formulation = self._add_flavour_system(formulation, flavour)
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         log_formulation_details(formulation, "AFTER FLAVOUR")
         
         # Adjust for user-selected ingredients
@@ -232,11 +205,7 @@ class AIIngredientRecommender:
             # 3. Emergency Fallback (Guaranteed Valid)
             if not is_valid:
                 self.logger.warning("All solvers failed. Using Emergency Fallback.")
-<<<<<<< HEAD
                 formulation = self._emergency_fallback(mode, carb_mode, flavour, user_selected)
-=======
-                formulation = self._emergency_fallback(mode, carb_mode, flavour)
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
                 is_valid = True # Fallback is always valid by design
         
         # Convert percentages to grams (50g bar)
@@ -262,7 +231,6 @@ class AIIngredientRecommender:
     
     def _get_base_formulation(self, mode: str, carb_mode: str) -> Dict[str, float]:
         """Get base formulation that sums to exactly 100%."""
-<<<<<<< HEAD
         
         if mode == 'pre':
             if carb_mode == 'maltodextrin':
@@ -311,41 +279,6 @@ class AIIngredientRecommender:
                     'leucine': 2.5,
                     'salt': 0.5,
                     'guarana_extract': 0.0
-=======
-        if mode == 'pre':
-            if carb_mode == 'maltodextrin':
-                return {
-                    'pea_protein': 35.0, 'sunflower_seed': 12.0,
-                    'rice_syrup': 14.0, 'glycerine': 8.0,
-                    'maltodextrin': 26.0, 'leucine': 1.5,
-                    'salt': 0.5, 'brown_rice_flour': 3.0,
-                    'guarana_extract': 0.0
-                }
-            else:  # pumpkinrice
-                return {
-                    'pea_protein': 34.0, 'sunflower_seed': 12.0,
-                    'rice_syrup': 15.0, 'glycerine': 9.0,
-                    'pumpkin_seed_flour': 15.5, 'brown_rice_flour': 8.0,
-                    'leucine': 1.5, 'salt': 0.5,
-                    'maltodextrin': 4.5, 'guarana_extract': 0.0
-                }
-        else:  # post
-            if carb_mode == 'maltodextrin':
-                return {
-                    'pea_protein': 38.0, 'sunflower_seed': 12.0,
-                    'rice_syrup': 13.0, 'glycerine': 7.0,
-                    'maltodextrin': 25.0, 'leucine': 2.5,
-                    'salt': 0.5, 'brown_rice_flour': 2.0,
-                    'guarana_extract': 0.0
-                }
-            else:  # pumpkinrice
-                return {
-                    'pea_protein': 36.0, 'sunflower_seed': 12.0,
-                    'rice_syrup': 14.0, 'glycerine': 8.0,
-                    'pumpkin_seed_flour': 13.5, 'brown_rice_flour': 8.0,
-                    'leucine': 2.5, 'salt': 0.5,
-                    'maltodextrin': 5.5, 'guarana_extract': 0.0
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
                 }
     
     def _safe_adjust(self, formulation: Dict[str, float], ingredient: str, adjustment: float):
@@ -398,7 +331,6 @@ class AIIngredientRecommender:
                 # Try adding to sunflower seed
                 actual_increase += safe_adjust('sunflower_seed', remainder * 0.5, is_increase=True)
             
-<<<<<<< HEAD
             # Compensate using COMPATIBLE ingredients based on carb_mode
             if carb_mode == 'maltodextrin':
                 safe_adjust('maltodextrin', actual_increase * 0.5, is_increase=False)
@@ -408,16 +340,6 @@ class AIIngredientRecommender:
                 safe_adjust('brown_rice_flour', actual_increase * 0.4, is_increase=False)
                 safe_adjust('pumpkin_seed_flour', actual_increase * 0.3, is_increase=False)
                 safe_adjust('rice_syrup', actual_increase * 0.2, is_increase=False)
-=======
-            # Compensate by reducing carbs proportionally
-            if carb_mode == 'maltodextrin':
-                safe_adjust('maltodextrin', actual_increase * 0.5, is_increase=False)
-                safe_adjust('rice_syrup', actual_increase * 0.3, is_increase=False)
-            else:
-                safe_adjust('pumpkin_seed_flour', actual_increase * 0.3, is_increase=False)
-                safe_adjust('brown_rice_flour', actual_increase * 0.2, is_increase=False)
-                safe_adjust('rice_syrup', actual_increase * 0.3, is_increase=False)
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         
         # Energy boost (carbs) with safety
         if needs['carb_boost'] > 0:
@@ -449,7 +371,6 @@ class AIIngredientRecommender:
         
         return formulation
     
-<<<<<<< HEAD
     def _add_flavour_system(self, formulation: Dict[str, float], flavour: str, carb_mode: str) -> Dict[str, float]:
         """Add flavour ingredients and compensate to maintain total percentage."""
         flavour_amount = 0
@@ -477,20 +398,6 @@ class AIIngredientRecommender:
                 ing_def = self.INGREDIENTS[compensation_target]
                 formulation[compensation_target] = max(ing_def.min_percent, current - flavour_amount)
 
-=======
-    def _add_flavour_system(self, formulation: Dict[str, float], flavour: str) -> Dict[str, float]:
-        """Add flavour ingredients."""
-        if flavour == 'chocolate':
-            formulation['cocoa_powder'] = 2.0
-            formulation['vanilla'] = 0.2
-        elif flavour == 'coffee':
-            formulation['instant_coffee'] = 1.2
-            formulation['vanilla'] = 0.2
-        elif flavour == 'matcha':
-            formulation['matcha_powder'] = 0.6
-            formulation['vanilla'] = 0.2
-        
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         return formulation
     
     def _adjust_for_user_selection(self, formulation: Dict[str, float], 
@@ -499,7 +406,6 @@ class AIIngredientRecommender:
         Adjust formulation when user manually selects specific ingredients.
         AI will optimize amounts while respecting user choices.
         """
-<<<<<<< HEAD
         # Check if user manually selected ANY flavour ingredient
         user_picked_flavours = False
         for ing in user_selected:
@@ -507,8 +413,6 @@ class AIIngredientRecommender:
                 user_picked_flavours = True
                 break
 
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         # Ensure all user-selected ingredients are included
         for ingredient in user_selected:
             if ingredient in self.INGREDIENTS:
@@ -521,7 +425,6 @@ class AIIngredientRecommender:
         essentials = ['pea_protein', 'sunflower_seed', 'rice_syrup', 'glycerine', 'salt']
         to_remove = []
         for ingredient in formulation:
-<<<<<<< HEAD
             # Keep if selected, essential, or is a flavour ingredient (preserved from flavour selection)
             is_flavour = False
             if ingredient in self.INGREDIENTS:
@@ -537,9 +440,6 @@ class AIIngredientRecommender:
                 keep = True
             
             if not keep:
-=======
-            if ingredient not in user_selected and ingredient not in essentials:
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
                 to_remove.append(ingredient)
         
         for ingredient in to_remove:
@@ -560,7 +460,6 @@ class AIIngredientRecommender:
         """Validate formulation against constraints."""
         errors = []
         
-<<<<<<< HEAD
         # Check for incompatible ingredient mixing
         if carb_mode == 'maltodextrin':
             pumpkin = formulation.get('pumpkin_seed_flour', 0)
@@ -582,8 +481,6 @@ class AIIngredientRecommender:
                     f"PumpkinRice mode contains {maltodextrin:.2f}% maltodextrin (incompatible)"
                 )
 
-=======
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         # Check ingredient bounds
         for ing, pct in formulation.items():
             if ing in self.INGREDIENTS:
@@ -714,13 +611,9 @@ class AIIngredientRecommender:
                 'type': 'Protein' if ing.is_protein else 'Carb' if ing.is_carb else 'Binder' if ing.is_binder else 'Flavour' if ing.is_flavour else 'Other',
                 'protein': ing.protein_content,
                 'carbs': ing.carb_content,
-<<<<<<< HEAD
                 'fats': ing.fat_content,
                 'description': ing.description,
                 'image_file': ing.image_file
-=======
-                'fats': ing.fat_content
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
             })
         return ingredients
 
@@ -773,7 +666,6 @@ class AIIngredientRecommender:
             self.logger.error(f"External AI failed: {e}")
             return None
 
-<<<<<<< HEAD
     def _emergency_fallback(self, mode: str, carb_mode: str, flavour: str, user_selected: List[str] = None) -> Dict[str, float]:
         """Emergency fallback: guaranteed valid formulation."""
         self.logger.warning(f"Using EMERGENCY FALLBACK for {mode}/{carb_mode}/{flavour}")
@@ -817,33 +709,11 @@ class AIIngredientRecommender:
                 'leucine': 2.0,
                 'salt': 0.5,
                 'guarana_extract': 0.0
-=======
-    def _emergency_fallback(self, mode: str, carb_mode: str, flavour: str) -> Dict[str, float]:
-        """Emergency fallback: guaranteed valid formulation."""
-        self.logger.warning(f"Using EMERGENCY FALLBACK for {mode}/{carb_mode}/{flavour}")
-        
-        if carb_mode == 'maltodextrin':
-            base = {
-                'pea_protein': 32.0, 'sunflower_seed': 10.0,
-                'rice_syrup': 15.0, 'glycerine': 7.0,
-                'maltodextrin': 20.0, 'brown_rice_flour': 8.0,
-                'leucine': 2.0, 'salt': 0.5,
-                'pumpkin_seed_flour': 5.5, 'guarana_extract': 0.0
-            }
-        else:
-            base = {
-                'pea_protein': 32.0, 'sunflower_seed': 10.0,
-                'rice_syrup': 16.0, 'glycerine': 9.0,
-                'pumpkin_seed_flour': 15.0, 'brown_rice_flour': 9.0,
-                'leucine': 2.0, 'salt': 0.5,
-                'maltodextrin': 6.5, 'guarana_extract': 0.0
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
             }
         
         # Add flavour if needed
         if flavour == 'coffee':
             base['instant_coffee'] = 0.8
-<<<<<<< HEAD
             if vanilla_amt > 0: base['vanilla'] = vanilla_amt
             base['maltodextrin' if carb_mode == 'maltodextrin' else 'brown_rice_flour'] -= (0.8 + vanilla_amt)
         elif flavour == 'chocolate':
@@ -859,18 +729,6 @@ class AIIngredientRecommender:
                 self.logger.info("Fallback: Including vanilla for 'none' flavour")
                 base['vanilla'] = vanilla_amt
                 base['maltodextrin' if carb_mode == 'maltodextrin' else 'brown_rice_flour'] -= vanilla_amt
-=======
-            base['vanilla'] = 0.2
-            base['maltodextrin' if carb_mode == 'maltodextrin' else 'brown_rice_flour'] -= 1.0
-        elif flavour == 'chocolate':
-            base['cocoa_powder'] = 1.5
-            base['vanilla'] = 0.2
-            base['maltodextrin' if carb_mode == 'maltodextrin' else 'brown_rice_flour'] -= 1.7
-        elif flavour == 'matcha':
-            base['matcha_powder'] = 0.5
-            base['vanilla'] = 0.2
-            base['maltodextrin' if carb_mode == 'maltodextrin' else 'brown_rice_flour'] -= 0.7
->>>>>>> 1c173a5094a15923e865d946c0126d3a4fdc3c86
         
         base = {k: v for k, v in base.items() if v > 0}
         total = sum(base.values())

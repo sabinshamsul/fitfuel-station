@@ -1,0 +1,80 @@
+﻿"""
+FitFuel Vending Machine - Streamlined Version
+CSV sensor input ΓåÆ User selections ΓåÆ AI recommendations ΓåÆ 50g bar
+"""
+
+import tkinter as tk
+from tkinter import messagebox
+import tkinter.font as tkfont
+from PIL import Image, ImageTk
+import itertools
+import logging
+import math
+
+from config import Config
+from sensor_data_reader import SensorDataReader
+from ai_ingredient_recommender import AIIngredientRecommender
+from allergen_system import AllergenAnalyzer
+# from payment_system import PricingCalculator
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='fitfuel_station.log'
+)
+
+
+class FitFuelVendingMachine:
+    """Streamlined vending machine application."""
+    
+    def __init__(self):
+        self.slideshow_running = False
+        self.pulse_state = True
+        self.current_slide = None
+        self.next_slide = None
+        self.loading_animation_job = None
+        self.fade_job = None
+        self.pulse_job = None
+        
+        # Components
+        self.sensor_reader = SensorDataReader()
+        self.ai_recommender = AIIngredientRecommender()
+        
+        # User data
+        self.sensor_data = None
+        self.mode = None
+        self.carb_mode = None
+        self.flavour = None
+        self.user_selected_ingredients = None
+        self.final_recommendation = None
+        self.inactivity_timer = None
+        self.ingredient_images = {}
+
+
+# Initialize
+root = tk.Tk()
+root.title("FitFuel Vending Machine")
+root.attributes('-fullscreen', True)
+Config.WIDTH = root.winfo_screenwidth()
+Config.HEIGHT = root.winfo_screenheight()
+root.geometry(f"{Config.WIDTH}x{Config.HEIGHT}")
+root.resizable(False, False)
+root.configure(bg='black')
+root.bind("<Escape>", lambda e: root.attributes("-fullscreen", False))
+
+app = FitFuelVendingMachine()
+
+def on_close():
+    """Handle window closing event."""
+    app.slideshow_running = False
+    
+    # Cancel all pending jobs to prevent "invalid command name" errors
+    for job_attr in ['loading_animation_job', 'inactivity_timer', 'fade_job', 'pulse_job']:
+        job = getattr(app, job_attr, None)
+        if job:
+            try:
+                root.after_cancel(job)
+            except Exception:
+                pass
+    
+    try:
